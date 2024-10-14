@@ -77,6 +77,32 @@ INSERT INTO products (id, name, price, category_id) VALUES
 (10, 'Board Game', 29.99, 5);
 
 
+-- Create a stored procedure to get products by category.
+CREATE PROCEDURE GetProductsByCategory
+    @CategoryID INT
+AS
+BEGIN
+    -- Using SELECT * instead of specifying columns
+    SELECT * 
+    FROM products 
+    WHERE category_id = @CategoryID;
+
+END;
+GO
+
+-- The following View will display the products with their category details.
+CREATE VIEW ViewProducts AS
+SELECT 
+    p.id AS ProductID,
+    p.name AS ProductName,
+    p.price AS ProductPrice,
+    c.name AS CategoryName,
+    c.description AS CategoryDescription
+FROM 
+    products p
+JOIN 
+    categories c ON p.category_id = c.id;
+GO
 
 
 
